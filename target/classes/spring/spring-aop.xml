@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--配置扫描器必须引入的xmlns 属性： xmlns:context="http://www.springframework.org/schema/context" -->
+<!--配置aop的通知必须引入的xmlns 属性： xmlns:aop="http://www.springframework.org/schema/aop" -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop">
+
+    <!--========================================== 注解实现通知 ===============================================-->
+    <!-- 配置扫描器 -->
+    <context:component-scan base-package="com.wx.ssm"></context:component-scan>
+    <!-- 开启注解对AOP的支持 -->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+</beans>

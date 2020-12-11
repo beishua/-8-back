@@ -1,0 +1,7 @@
+com\wx\ssm\service\impl\UserServiceImpl.class
+com\wx\ssm\controller\UserController.class
+com\wx\ssm\mapper\UserMapper.class
+com\wx\ssm\model\User.class
+com\wx\ssm\config\SimpleCORSFilter.class
+com\wx\ssm\service\UserService.class
+com\wx\ssm\Servlet\LoginServlet.class

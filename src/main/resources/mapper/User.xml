@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wx.ssm.mapper.UserMapper">
+    <select id="findAllBySome" parameterType="com.wx.ssm.model.User" resultType="com.wx.ssm.model.User">
+        select * from user where 1=1
+        <if test="userName!='' and userName!=null">
+            and userName like concat('%',#{userName},'%')
+        </if>
+        <if test="sex!='全部' and sex!=null">
+            and sex =#{sex}
+        </if>
+        <if test="phone!='' and phone!=null">
+            and phone like concat('%',#{phone},'%')
+        </if>
+        <if test="startDate!='' and endDate==''">
+            and date &gt;=#{startDate}
+        </if>
+        <if test="startDate=='' and endDate!=''">
+            and date &lt;=#{endDate}
+        </if>
+        <if test="startDate!='' and endDate!=''">
+            and date between #{startDate} and #{endDate}
+        </if>
+        <if test="team!='请选择' and team!=null">
+            and team =#{team}
+        </if>
+        <if test="role!='请选择' and role!=null">
+            and role =#{role}
+        </if>
+        <if test="education!='请选择' and education!=null">
+            and education =#{education}
+        </if>
+        <if test="state!='请选择' and state!=null">
+            and state =#{state}
+        </if>
+        <bind name="pageNum" value="(pageNum-1)*pageSize"/>
+        limit #{pageNum},#{pageSize}
+    </select>
+    <select id="getCount" parameterType="com.wx.ssm.model.User" resultType="java.lang.Integer">
+        select count(*) from user where 1=1
+        <if test="userName!='' and userName!=null">
+            and userName like concat('%',#{userName},'%')
+        </if>
+        <if test="sex!='全部' and sex!=null">
+            and sex =#{sex}
+        </if>
+        <if test="phone!='' and phone!=null">
+            and phone like concat('%',#{phone},'%')
+        </if>
+        <if test="startDate!='' and endDate==''">
+            and date &gt;=#{startDate}
+        </if>
+        <if test="startDate=='' and endDate!=''">
+            and date &lt;=#{endDate}
+        </if>
+        <if test="startDate!='' and endDate!=''">
+            and date between #{startDate} and #{endDate}
+        </if>
+        <if test="team!='请选择' and team!=null">
+            and team =#{team}
+        </if>
+        <if test="role!='请选择' and role!=null">
+            and role =#{role}
+        </if>
+        <if test="education!='请选择' and education!=null">
+            and education =#{education}
+        </if>
+        <if test="state!='请选择' and state!=null">
+            and state =#{state}
+        </if>
+    </select>
+    <insert id="add">
+        insert  into user (userName,password) values (#{userName},#{password})
+    </insert>
+    <select id="findByUserName" parameterType="java.lang.String" resultType="com.wx.ssm.model.User">
+        select * from user where userName=#{userName}
+    </select>
+    <delete id="del">
+        delete from user where id=#{id}
+    </delete>
+        <select id="findById" parameterType="com.wx.ssm.model.User" resultMap="dd">
+        select * from user where id=#{id}
+    </select>
+    <resultMap id="dd" type="com.wx.ssm.model.User">
+        <result property="id" column="id"/>
+        <result property="age" column="age"/>
+        <result property="userName" column="userName"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="school" column="school"/>
+        <result property="head" column="head"/>
+        <result property="sex" column="sex"/>
+        <result property="team" column="team"/>
+        <result property="education" column="education"/>
+        <result property="role" column="role"/>
+        <result property="state" column="state"/>
+    </resultMap>
+    <update id="edit">
+        update user set
+        <if test="userName!='' || userName!=null"> userName=#{userName},</if>
+        <if test=" password!='' || password!=null"> password=#{password},</if>
+        <if test=" sex!='' || sex!=null"> sex=#{sex},</if>
+        <if test=" age!='' || age!=null"> age=#{age},</if>
+        <if test=" phone!='' || phone!=null"> phone=#{phone},</if>
+        <if test=" address!='' || address!=null"> address=#{address},</if>
+        <if test=" school!='' || school!=null"> school=#{school},</if>
+        <if test=" head!='' || head!=null"> head=#{head},</if>
+        <if test=" team!='' || team!=null"> team=#{team},</if>
+        <if test=" education!='' || education!=null"> education=#{education},</if>
+        <if test=" role!='' || role!=null"> role=#{role},</if>
+        <if test=" state!='' || state!=null"> state=#{state} </if>
+         where id=#{id}
+    </update>
+    <select id="isHaveFindByUsernameAndPassword" parameterType="com.wx.ssm.model.User" resultType="com.wx.ssm.model.User">
+        select * from user where userName=#{userName} and password=#{password} and state=1
+    </select>
+</mapper>
