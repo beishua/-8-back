@@ -112,6 +112,6 @@
          where id=#{id}
     </update>
     <select id="isHaveFindByUsernameAndPassword" parameterType="com.wx.ssm.model.User" resultType="com.wx.ssm.model.User">
-        select * from user where userName=#{userName} and password=#{password} and state=1
+        select * from user where userName=#{userName} and password=#{password} and state!=1
     </select>
 </mapper>

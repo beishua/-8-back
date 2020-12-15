@@ -67,8 +67,4 @@ public class UserController {
         jsonObject.put("result",result);
         return jsonObject.toString();
     }
-//    @PostMapping("/exit")
-//    public String exit(User userName){
-//        return null;
-//    }
 }

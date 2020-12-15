@@ -22,6 +22,24 @@ public class User implements Serializable{
     private String updateTime;
     private Integer pageNum;
     private Integer pageSize;
+    private String teamCode;
+    private String userCode;
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getTeamCode() {
+        return teamCode;
+    }
+
+    public void setTeamCode(String teamCode) {
+        this.teamCode = teamCode;
+    }
 
     public Integer getPageNum() {
         return pageNum;

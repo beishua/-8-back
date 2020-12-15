@@ -2,6 +2,7 @@ package com.wx.ssm.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wx.ssm.model.Team;
+import com.wx.ssm.model.User;
 import com.wx.ssm.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,5 +32,33 @@ public class TeamController {
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("count",count);
         return jsonObject.toString();
+    }
+    @PostMapping("/del")
+    public String del(@RequestBody Team id){
+        int result=teamService.del(id);
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("result",result);
+        return jsonObject.toString();
+    }
+    @PostMapping("/teamEdit")
+    public String exit(@RequestBody Team team){
+        int count=teamService.edit(team);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("count",count);
+        return jsonObject.toString();
+    }
+    @PostMapping("/findById")
+    public String findById(@RequestBody Team team){
+        Team result=teamService.findById(team);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result",result);
+        return jsonObject.toString();
+    }
+    @PostMapping("/leaderName")
+    public String leaderName(@RequestBody User user){
+        List<Team> list=teamService.leaderName(user);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("list",list);
+         return jsonObject.toString();
     }
 }

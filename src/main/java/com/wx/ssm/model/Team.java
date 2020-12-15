@@ -6,7 +6,7 @@ public class Team implements Serializable {
     private Integer id;
     private String teamCode;
     private String teamName;
-    private String teamLeader;
+    private String leaderCode;
     private String leaderName;
     private String teamSize;
     private String state;
@@ -16,6 +16,14 @@ public class Team implements Serializable {
     private String updateTime;
     private Integer pageNum;
     private Integer pageSize;
+
+    public String getLeaderCode() {
+        return leaderCode;
+    }
+
+    public void setLeaderCode(String leaderCode) {
+        this.leaderCode = leaderCode;
+    }
 
     public String getStartCreateTime() {
         return startCreateTime;
@@ -71,14 +79,6 @@ public class Team implements Serializable {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
-    }
-
-    public String getTeamLeader() {
-        return teamLeader;
-    }
-
-    public void setTeamLeader(String teamLeader) {
-        this.teamLeader = teamLeader;
     }
 
     public String getLeaderName() {

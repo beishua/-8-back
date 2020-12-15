@@ -2,6 +2,7 @@ package com.wx.ssm.service.impl;
 
 import com.wx.ssm.mapper.TeamMapper;
 import com.wx.ssm.model.Team;
+import com.wx.ssm.model.User;
 import com.wx.ssm.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,31 @@ public class TeamServiceImpl implements TeamService {
             return count;
         }
     }
-
     private boolean isHaveFindTeamCode(String teamCode) {
         Team team=teamMapper.findByTeamCode(teamCode);
         boolean isHave=(team==null);
         return !isHave;
     }
+
+    @Override
+    public int del(Team id) {
+        return teamMapper.del(id);
+    }
+
+    @Override
+    public int edit(Team team) {
+        return teamMapper.edit(team);
+    }
+
+    @Override
+    public Team findById(Team team) {
+        return teamMapper.findById(team);
+    }
+
+    @Override
+    public List<Team> leaderName(User user) {
+        return teamMapper.leaderName(user);
+    }
+
+
 }

@@ -2,39 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wx.ssm.mapper.TeamMapper">
     <select id="findAllBySome" parameterType="com.wx.ssm.model.Team" resultType="com.wx.ssm.model.Team">
-        select * from team where 1=1
-        <if test="teamCode!='' and teamCode!=null">
-            and team_code like concat('%',#{teamCode},'%')
-        </if>
-        <if test="teamName!='' and teamName!=null">
-            and team_name like concat('%',#{teamName},'%')
-        </if>
-        <if test="teamLeader!='' and teamLeader!=null">
-            and team_leader like concat('%',#{teamLeader},'%')
-        </if>
-        <if test="startCreateTime!='' and endCreateTime==''">
-            and create_time &gt;=#{createTime}
-        </if>
-        <if test="startCreateTime=='' and endCreateTime!=''">
-            and create_time &lt;=#{endCreateTime}
-        </if>
-        <if test="startCreateTime!='' and endCreateTime!=''">
-            and create_time between #{startCreateTime} and #{endCreateTime}
-        </if>
-        <if test="leaderName!='' and leaderName!=null">
-            and leader_name like concat('%',#{leaderName},'%')
-        </if>
-        <if test="teamSize!='' and teamSize!=null">
-            and team_size like concat('%',#{teamSize},'%')
-        </if>
-        <if test="updateTime!='' and updateTime!=null">
-            and update_time like concat('%',#{updateTime},'%')
-        </if>
-        <if test="state!='全部' and state!=null">
-            and state =#{state}
-        </if>
+        select * from (
+        select team.*, count(user.team_code) team_size from user right join team on team.team_code=user.team_code group by team.team_code
+        ) aa where id>0
+<!--        select * from team where 1=1-->
+<!--        <if test="teamCode!='' and teamCode!=null">-->
+<!--            and team_code like concat('%',#{teamCode},'%')-->
+<!--        </if>-->
+<!--        <if test="teamName!='' and teamName!=null">-->
+<!--            and team_name like concat('%',#{teamName},'%')-->
+<!--        </if>-->
+<!--        <if test="leaderCode!='' and leaderCode!=null">-->
+<!--            and leader_code like concat('%',#{leaderCode},'%')-->
+<!--        </if>-->
+<!--        <if test="startCreateTime!='' and endCreateTime==''">-->
+<!--            and create_time &gt;=#{createTime}-->
+<!--        </if>-->
+<!--        <if test="startCreateTime=='' and endCreateTime!=''">-->
+<!--            and create_time &lt;=#{endCreateTime}-->
+<!--        </if>-->
+<!--        <if test="startCreateTime!='' and endCreateTime!=''">-->
+<!--            and create_time between #{startCreateTime} and #{endCreateTime}-->
+<!--        </if>-->
+<!--        <if test="leaderName!='' and leaderName!=null">-->
+<!--            and leader_name like concat('%',#{leaderName},'%')-->
+<!--        </if>-->
+<!--        <if test="teamSize!='' and teamSize!=null">-->
+<!--            and team_size like concat('%',#{teamSize},'%')-->
+<!--        </if>-->
+<!--        <if test="updateTime!='' and updateTime!=null">-->
+<!--            and update_time like concat('%',#{updateTime},'%')-->
+<!--        </if>-->
+<!--        <if test="state!='全部' and state!=null">-->
+<!--            and state =#{state}-->
+<!--        </if>-->
         <bind name="pageNum" value="(pageNum-1)*pageSize"/>
         limit #{pageNum},#{pageSize}
+
     </select>
     <select id="getCount" parameterType="com.wx.ssm.model.Team" resultType="java.lang.Integer">
         select count(*) from team where 1=1
@@ -44,8 +48,8 @@
         <if test="teamName!='' and teamName!=null">
             and team_name like concat('%',#{teamName},'%')
         </if>
-        <if test="teamLeader!='' and teamLeader!=null">
-            and team_leader like concat('%',#{teamLeader},'%')
+        <if test="leaderCode!='' and leaderCode!=null">
+            and leaderCode like concat('%',#{leaderCode},'%')
         </if>
         <if test="startCreateTime!='' and endCreateTime==''">
             and create_time &gt;=#{createTime}
@@ -74,5 +78,25 @@
     </insert>
     <select id="findByTeamCode" parameterType="java.lang.String" resultType="com.wx.ssm.model.Team">
         select * from team where team_code=#{team_code}
+    </select>
+    <delete id="del">
+        delete from team where id=#{id} and team_size=0
+    </delete>
+    <update id="edit">
+        update team set
+        <if test="teamName!='' || teamName!=null"> team_name=#{teamName},</if>
+        <if test="leaderCode!='' || leaderCode!=null"> leader_code=#{leaderCode},</if>
+        <if test=" leaderName!='' || leaderName!=null"> leader_name=#{leaderName}</if>
+         where team_code=#{teamCode}
+    </update>
+    <select id="findById" parameterType="com.wx.ssm.model.Team" resultMap="dd">
+        select * from team where team_code=#{teamCode}
+    </select>
+    <resultMap id="dd" type="com.wx.ssm.model.Team">
+        <result property="teamName" column="team_name"/>
+        <result property="leaderName" column="leader_name"/>
+    </resultMap>
+    <select id="leaderName" parameterType="com.wx.ssm.model.User" resultType="com.wx.ssm.model.User">
+        select * from user where team_code=#{teamCode}
     </select>
 </mapper>

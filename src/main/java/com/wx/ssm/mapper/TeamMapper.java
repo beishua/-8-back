@@ -13,4 +13,12 @@ public interface TeamMapper {
     int add(Team team);
 
     Team findByTeamCode(String teamCode);
+
+    int del(Team id);
+
+    int edit(Team team);
+
+    Team findById(Team team);
+
+    List<Team> leaderName(User user);
 }
