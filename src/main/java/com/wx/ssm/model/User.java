@@ -24,6 +24,33 @@ public class User implements Serializable{
     private Integer pageSize;
     private String teamCode;
     private String userCode;
+    private String code;
+    private String sessionCode;
+    private String list;
+
+    public String getList() {
+        return list;
+    }
+
+    public void setList(String list) {
+        this.list = list;
+    }
+
+    public String getSessionCode() {
+        return sessionCode;
+    }
+
+    public void setSessionCode(String sessionCode) {
+        this.sessionCode = sessionCode;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getUserCode() {
         return userCode;

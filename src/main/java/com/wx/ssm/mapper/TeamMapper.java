@@ -1,5 +1,6 @@
 package com.wx.ssm.mapper;
 
+import com.wx.ssm.model.Sign;
 import com.wx.ssm.model.Team;
 import com.wx.ssm.model.User;
 
@@ -21,4 +22,6 @@ public interface TeamMapper {
     Team findById(Team team);
 
     List<Team> leaderName(User user);
+
+//    Team findTeamCode(Team team);
 }

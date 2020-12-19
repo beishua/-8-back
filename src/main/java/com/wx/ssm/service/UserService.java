@@ -20,4 +20,10 @@ public interface UserService {
     int edit(User user);
 
     int add(User user);
+
+    List<User> findTeamCode();
+
+    User findBySignTeamCode(User user);
+
+    List<User> deleteByIds(User ids);
 }

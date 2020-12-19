@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wx.ssm.mapper.SignMapper">
+    <select id="findLeaderCode" parameterType="com.wx.ssm.model.Team" resultType="com.wx.ssm.model.Team">
+        select * from team where leader_code=#{leaderCode}
+    </select>
+    <select id="getSign" parameterType="com.wx.ssm.model.User" resultType="com.wx.ssm.model.User">
+        select * from user where team_code = #{teamCode} and state!="冻结"
+    </select>
+<!--    <select id="teamFindById" parameterType="com.wx.ssm.model.User" resultMap="dd">-->
+<!--        select * from user where id=#{id}-->
+<!--    </select>-->
+<!--    <resultMap id="dd" type="com.wx.ssm.model.User">-->
+<!--        <result property="id" column="id"/>-->
+<!--        <result property="name" column="userName"/>-->
+<!--        <result property=""/>-->
+<!--    </resultMap>-->
+</mapper>

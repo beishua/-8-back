@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/team", produces = "application/json;charset=UTF-8")
-public class TeamController {
+public class TeamController  {
     @Autowired//注入
     private TeamService teamService;
 
@@ -61,4 +61,11 @@ public class TeamController {
         jsonObject.put("list",list);
          return jsonObject.toString();
     }
+//    @PostMapping("/start")
+//    public String start(@RequestBody Team team){
+//        int count=teamService.start(team);
+//        JSONObject jsonObject=new JSONObject();
+//        jsonObject.put("count",count);
+//        return jsonObject.toString();
+//    }
 }

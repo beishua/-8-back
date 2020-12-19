@@ -1,5 +1,6 @@
 package com.wx.ssm.mapper;
 
+import com.wx.ssm.model.Team;
 import com.wx.ssm.model.User;
 import java.util.List;
 
@@ -19,7 +20,13 @@ public interface UserMapper {
 
     int add(User user);
 
-    User findByUserName(String userName);
+    User findByUserName(String userCode);
 
     User state(User user);
+
+    List<User> findTeamCode();
+
+    User findBySignTeamCode(User user);
+
+    List<User> deleteByIds(User ids);
 }

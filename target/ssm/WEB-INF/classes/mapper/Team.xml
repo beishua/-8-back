@@ -6,36 +6,36 @@
         select team.*, count(user.team_code) team_size from user right join team on team.team_code=user.team_code group by team.team_code
         ) aa where id>0
 <!--        select * from team where 1=1-->
-<!--        <if test="teamCode!='' and teamCode!=null">-->
-<!--            and team_code like concat('%',#{teamCode},'%')-->
-<!--        </if>-->
-<!--        <if test="teamName!='' and teamName!=null">-->
-<!--            and team_name like concat('%',#{teamName},'%')-->
-<!--        </if>-->
-<!--        <if test="leaderCode!='' and leaderCode!=null">-->
-<!--            and leader_code like concat('%',#{leaderCode},'%')-->
-<!--        </if>-->
-<!--        <if test="startCreateTime!='' and endCreateTime==''">-->
-<!--            and create_time &gt;=#{createTime}-->
-<!--        </if>-->
-<!--        <if test="startCreateTime=='' and endCreateTime!=''">-->
-<!--            and create_time &lt;=#{endCreateTime}-->
-<!--        </if>-->
-<!--        <if test="startCreateTime!='' and endCreateTime!=''">-->
-<!--            and create_time between #{startCreateTime} and #{endCreateTime}-->
-<!--        </if>-->
-<!--        <if test="leaderName!='' and leaderName!=null">-->
-<!--            and leader_name like concat('%',#{leaderName},'%')-->
-<!--        </if>-->
-<!--        <if test="teamSize!='' and teamSize!=null">-->
-<!--            and team_size like concat('%',#{teamSize},'%')-->
-<!--        </if>-->
-<!--        <if test="updateTime!='' and updateTime!=null">-->
-<!--            and update_time like concat('%',#{updateTime},'%')-->
-<!--        </if>-->
-<!--        <if test="state!='全部' and state!=null">-->
-<!--            and state =#{state}-->
-<!--        </if>-->
+        <if test="teamCode!='' and teamCode!=null">
+            and team_code like concat('%',#{teamCode},'%')
+        </if>
+        <if test="teamName!='' and teamName!=null">
+            and team_name like concat('%',#{teamName},'%')
+        </if>
+        <if test="leaderCode!='' and leaderCode!=null">
+            and leader_code like concat('%',#{leaderCode},'%')
+        </if>
+        <if test="startCreateTime!='' and endCreateTime==''">
+            and create_time &gt;=#{createTime}
+        </if>
+        <if test="startCreateTime=='' and endCreateTime!=''">
+            and create_time &lt;=#{endCreateTime}
+        </if>
+        <if test="startCreateTime!='' and endCreateTime!=''">
+            and create_time between #{startCreateTime} and #{endCreateTime}
+        </if>
+        <if test="leaderName!='' and leaderName!=null">
+            and leader_name like concat('%',#{leaderName},'%')
+        </if>
+        <if test="teamSize!='' and teamSize!=null">
+            and team_size like concat('%',#{teamSize},'%')
+        </if>
+        <if test="updateTime!='' and updateTime!=null">
+            and update_time like concat('%',#{updateTime},'%')
+        </if>
+        <if test="state!='请选择' and state!=null">
+            and state =#{state}
+        </if>
         <bind name="pageNum" value="(pageNum-1)*pageSize"/>
         limit #{pageNum},#{pageSize}
 
@@ -69,7 +69,7 @@
         <if test="updateTime!='' and updateTime!=null">
             and update_time like concat('%',#{updateTime},'%')
         </if>
-        <if test="state!='全部' and state!=null">
+        <if test="state!='请选择' and state!=null">
             and state =#{state}
         </if>
     </select>

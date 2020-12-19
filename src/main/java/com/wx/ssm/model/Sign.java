@@ -3,6 +3,7 @@ package com.wx.ssm.model;
 import java.io.Serializable;
 
 public class Sign implements Serializable {
+    private Integer id;
     private String userName;
     private String userCode;
     private String teamCode;
@@ -12,6 +13,32 @@ public class Sign implements Serializable {
     private String state;
     private String createTime;
     private String updateTime;
+    private Integer pageNum;
+    private Integer pageSize;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public String getUserName() {
         return userName;

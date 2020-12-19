@@ -1,6 +1,7 @@
 package com.wx.ssm.service.impl;
 
 import com.wx.ssm.mapper.TeamMapper;
+import com.wx.ssm.model.Sign;
 import com.wx.ssm.model.Team;
 import com.wx.ssm.model.User;
 import com.wx.ssm.service.TeamService;
@@ -34,7 +35,7 @@ public class TeamServiceImpl implements TeamService {
         }
     }
     private boolean isHaveFindTeamCode(String teamCode) {
-        Team team=teamMapper.findByTeamCode(teamCode);
+        Team team = teamMapper.findByTeamCode(teamCode);
         boolean isHave=(team==null);
         return !isHave;
     }
@@ -58,6 +59,21 @@ public class TeamServiceImpl implements TeamService {
     public List<Team> leaderName(User user) {
         return teamMapper.leaderName(user);
     }
+
+//    @Override
+//    public int start(Team team) {
+//        boolean is= isFindTeamCode(team);
+//        if (is){
+//            return 1;
+//        }else{
+//            return 0;
+//        }
+//    }
+//    private boolean isFindTeamCode(Team team) {
+//        Team team1 = teamMapper.findTeamCode(team);
+//        boolean is=(team1==null);
+//        return !is;
+//    }
 
 
 }

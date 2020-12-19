@@ -6,6 +6,9 @@
         <if test="userName!='' and userName!=null">
             and userName like concat('%',#{userName},'%')
         </if>
+        <if test="userCode!='' and userCode!=null">
+            and user_code like concat('%',#{userCode},'%')
+        </if>
         <if test="sex!='全部' and sex!=null">
             and sex =#{sex}
         </if>
@@ -21,9 +24,9 @@
         <if test="startDate!='' and endDate!=''">
             and date between #{startDate} and #{endDate}
         </if>
-        <if test="team!='请选择' and team!=null">
-            and team =#{team}
-        </if>
+<!--        <if test="teamCode!='请选择' and teamCode!=null">-->
+<!--            and team_code =#{teamCode}-->
+<!--        </if>-->
         <if test="role!='请选择' and role!=null">
             and role =#{role}
         </if>
@@ -41,6 +44,9 @@
         <if test="userName!='' and userName!=null">
             and userName like concat('%',#{userName},'%')
         </if>
+        <if test="userCode!='' and userCode!=null">
+            and user_code like concat('%',#{userCode},'%')
+        </if>
         <if test="sex!='全部' and sex!=null">
             and sex =#{sex}
         </if>
@@ -56,8 +62,8 @@
         <if test="startDate!='' and endDate!=''">
             and date between #{startDate} and #{endDate}
         </if>
-        <if test="team!='请选择' and team!=null">
-            and team =#{team}
+        <if test="teamCode!='请选择' and teamCode!=null">
+            and team_code =#{teamCode}
         </if>
         <if test="role!='请选择' and role!=null">
             and role =#{role}
@@ -70,33 +76,43 @@
         </if>
     </select>
     <insert id="add">
-        insert  into user (userName,password) values (#{userName},#{password})
+        insert into user (user_code,password) values (#{userCode},#{password})
     </insert>
     <select id="findByUserName" parameterType="java.lang.String" resultType="com.wx.ssm.model.User">
-        select * from user where userName=#{userName}
+        select * from user where user_code=#{userCode}
     </select>
     <delete id="del">
         delete from user where id=#{id}
     </delete>
-        <select id="findById" parameterType="com.wx.ssm.model.User" resultMap="dd">
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from user where id in
+        (
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item.ids}
+        </foreach>
+        )
+    </delete>
+    <select id="findById" parameterType="com.wx.ssm.model.User" resultMap="dd">
         select * from user where id=#{id}
     </select>
     <resultMap id="dd" type="com.wx.ssm.model.User">
         <result property="id" column="id"/>
         <result property="age" column="age"/>
+        <result property="userCode" column="user_code"/>
         <result property="userName" column="userName"/>
         <result property="phone" column="phone"/>
         <result property="address" column="address"/>
         <result property="school" column="school"/>
         <result property="head" column="head"/>
         <result property="sex" column="sex"/>
-        <result property="team" column="team"/>
+        <result property="teamCode" column="team_code"/>
         <result property="education" column="education"/>
         <result property="role" column="role"/>
         <result property="state" column="state"/>
     </resultMap>
     <update id="edit">
         update user set
+        <if test="userCode!='' || userCode!=null"> user_code=#{userCode},</if>
         <if test="userName!='' || userName!=null"> userName=#{userName},</if>
         <if test=" password!='' || password!=null"> password=#{password},</if>
         <if test=" sex!='' || sex!=null"> sex=#{sex},</if>
@@ -105,13 +121,19 @@
         <if test=" address!='' || address!=null"> address=#{address},</if>
         <if test=" school!='' || school!=null"> school=#{school},</if>
         <if test=" head!='' || head!=null"> head=#{head},</if>
-        <if test=" team!='' || team!=null"> team=#{team},</if>
+        <if test=" teamCode!='' || teamCode!=null"> team_code=#{teamCode},</if>
         <if test=" education!='' || education!=null"> education=#{education},</if>
         <if test=" role!='' || role!=null"> role=#{role},</if>
         <if test=" state!='' || state!=null"> state=#{state} </if>
          where id=#{id}
     </update>
     <select id="isHaveFindByUsernameAndPassword" parameterType="com.wx.ssm.model.User" resultType="com.wx.ssm.model.User">
-        select * from user where userName=#{userName} and password=#{password} and state!=1
+        select * from user where user_code=#{userCode} and password=#{password} and state!="冻结"
+    </select>
+    <select id="findTeamCode" resultType="com.wx.ssm.model.Team">
+        select * from team
+    </select>
+    <select id="findBySignTeamCode" parameterType="com.wx.ssm.model.User" resultType="com.wx.ssm.model.User">
+        select * from user where user_code=#{userCode}
     </select>
 </mapper>
